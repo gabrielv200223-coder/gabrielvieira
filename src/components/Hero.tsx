@@ -5,7 +5,7 @@ const tagline = "Não edito só vídeos. Eu entendo pessoas.".split(" ");
 export function Hero() {
   return (
     <section className="relative flex min-h-screen items-center justify-center px-6 py-32">
-      <div className="mx-auto max-w-5xl text-center">
+      <div className="mx-auto max-w-5xl">
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}

@@ -38,7 +38,7 @@ export function Contact() {
 
   return (
     <section id="contato" className="relative px-6 py-32 md:py-44">
-      <div className="mx-auto max-w-3xl text-center">
+      <div className="mx-auto max-w-3xl">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -147,7 +147,7 @@ export function Contact() {
               <p className="text-sm italic text-white/60">Mensagem pronta — abrindo WhatsApp...</p>
             )}
 
-            <div className="flex justify-end pt-2">
+            <div className="flex pt-2">
               <button
                 type="submit"
                 disabled={status === "sending"}
