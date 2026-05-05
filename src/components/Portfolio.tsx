@@ -72,7 +72,7 @@ export function Portfolio() {
                     />
                   )}
                   <span
-                    className={`relative italic ${isActive ? "text-white" : "text-white/55 hover:text-white/80"}`}
+                    className={`relative ${isActive ? "text-white" : "text-white/55 hover:text-white/80"}`}
                   >
                     {t.label}
                   </span>
