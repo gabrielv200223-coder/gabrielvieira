@@ -19,7 +19,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.1, ease: "easeOut", delay: 0.1 }}
-          className="text-[18vw] leading-[0.85] tracking-[-0.04em] sm:text-[12rem] md:text-[14rem]"
+          className="text-[14vw] leading-[0.85] tracking-[-0.04em] sm:text-[9rem] md:text-[11rem]"
           style={{ fontWeight: 900 }}
         >
           Gabriel

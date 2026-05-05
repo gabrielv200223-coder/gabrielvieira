@@ -1,4 +1,12 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
+import { z } from "zod";
+
+const contactSchema = z.object({
+  name: z.string().trim().min(1, "Informe seu nome").max(100),
+  email: z.string().trim().email("E-mail inválido").max(255),
+  message: z.string().trim().min(1, "Escreva uma mensagem").max(1000),
+});
 
 function WhatsAppIcon() {
   return (
@@ -9,6 +17,25 @@ function WhatsAppIcon() {
 }
 
 export function Contact() {
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const result = contactSchema.safeParse(form);
+    if (!result.success) {
+      setStatus("error");
+      setErrorMsg(result.error.issues[0]?.message ?? "Verifique os campos");
+      return;
+    }
+    setStatus("sending");
+    const text = `Olá! Sou ${result.data.name} (${result.data.email}).%0A%0A${encodeURIComponent(result.data.message)}`;
+    window.open(`https://wa.me/5554996276214?text=${text}`, "_blank", "noopener,noreferrer");
+    setStatus("sent");
+    setForm({ name: "", email: "", message: "" });
+  };
+
   return (
     <section id="contato" className="relative px-6 py-32 md:py-44">
       <div className="mx-auto max-w-3xl text-center">
@@ -31,16 +58,6 @@ export function Contact() {
         >
           Vamos <em className="italic font-light text-white/80">conversar.</em>
         </motion.h2>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.9, ease: "easeOut", delay: 0.2 }}
-          className="mx-auto mt-8 max-w-xl text-lg italic text-white/60 md:text-xl"
-        >
-          A melhor forma de me chamar é pelo WhatsApp. Respondo rápido.
-        </motion.p>
 
         <motion.div
           initial={{ opacity: 0, scale: 0.92 }}
@@ -68,6 +85,86 @@ export function Contact() {
             <span className="tracking-wide">Chamar no WhatsApp</span>
           </motion.a>
         </motion.div>
+
+        <motion.form
+          onSubmit={handleSubmit}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.9, ease: "easeOut", delay: 0.3 }}
+          className="glass mx-auto mt-16 max-w-2xl rounded-3xl p-8 text-left md:p-10"
+          style={{ boxShadow: "inset 0 1px 0 rgba(255,255,255,0.05)" }}
+          noValidate
+        >
+          <div className="space-y-6">
+            <div>
+              <label htmlFor="name" className="mb-3 block text-[10px] uppercase tracking-[0.4em] text-white/50">
+                Nome
+              </label>
+              <input
+                id="name"
+                type="text"
+                value={form.name}
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
+                placeholder="Seu nome"
+                maxLength={100}
+                className="w-full rounded-full border border-white/10 bg-white/[0.03] px-6 py-4 text-base italic text-white/90 placeholder:text-white/30 outline-none transition-all focus:border-[#e81035]/50 focus:bg-white/[0.05]"
+              />
+            </div>
+            <div>
+              <label htmlFor="email" className="mb-3 block text-[10px] uppercase tracking-[0.4em] text-white/50">
+                E-mail
+              </label>
+              <input
+                id="email"
+                type="email"
+                value={form.email}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
+                placeholder="voce@email.com"
+                maxLength={255}
+                className="w-full rounded-full border border-white/10 bg-white/[0.03] px-6 py-4 text-base italic text-white/90 placeholder:text-white/30 outline-none transition-all focus:border-[#e81035]/50 focus:bg-white/[0.05]"
+              />
+            </div>
+            <div>
+              <label htmlFor="message" className="mb-3 block text-[10px] uppercase tracking-[0.4em] text-white/50">
+                Mensagem
+              </label>
+              <textarea
+                id="message"
+                rows={5}
+                value={form.message}
+                onChange={(e) => setForm({ ...form, message: e.target.value })}
+                placeholder="Conte sobre seu projeto..."
+                maxLength={1000}
+                className="w-full rounded-3xl border border-white/10 bg-white/[0.03] px-6 py-4 text-base italic text-white/90 placeholder:text-white/30 outline-none transition-all focus:border-[#e81035]/50 focus:bg-white/[0.05]"
+              />
+            </div>
+
+            {status === "error" && (
+              <p className="text-sm italic text-[#e81035]">{errorMsg}</p>
+            )}
+            {status === "sent" && (
+              <p className="text-sm italic text-white/60">Mensagem pronta — abrindo WhatsApp...</p>
+            )}
+
+            <div className="flex justify-end pt-2">
+              <button
+                type="submit"
+                disabled={status === "sending"}
+                className="glass glass-hover shimmer-sweep group inline-flex items-center gap-3 rounded-full px-8 py-4 text-sm uppercase tracking-[0.3em] text-white/90 disabled:opacity-50"
+                style={{
+                  boxShadow: "inset 0 1px 0 rgba(232,16,53,0.1), 0 0 30px -12px rgba(232,16,53,0.25)",
+                }}
+              >
+                Enviar mensagem
+                <span
+                  className="inline-block h-[1px] w-8 transition-all duration-500 group-hover:w-14"
+                  style={{ backgroundColor: "#e81035" }}
+                />
+              </button>
+            </div>
+          </div>
+        </motion.form>
 
         <motion.div
           initial={{ opacity: 0 }}
