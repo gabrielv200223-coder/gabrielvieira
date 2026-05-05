@@ -56,7 +56,7 @@ export function Contact() {
           transition={{ duration: 1, ease: "easeOut" }}
           className="text-6xl leading-[1] md:text-8xl"
         >
-          Vamos <em className="italic font-light text-white/80">conversar.</em>
+          Vamos <em className="font-light text-white/80">conversar.</em>
         </motion.h2>
 
         <motion.div
@@ -108,7 +108,7 @@ export function Contact() {
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                 placeholder="Seu nome"
                 maxLength={100}
-                className="w-full rounded-full border border-white/10 bg-white/[0.03] px-6 py-4 text-base italic text-white/90 placeholder:text-white/30 outline-none transition-all focus:border-[#e81035]/50 focus:bg-white/[0.05]"
+                className="w-full rounded-full border border-white/10 bg-white/[0.03] px-6 py-4 text-base text-white/90 placeholder:text-white/30 outline-none transition-all focus:border-[#e81035]/50 focus:bg-white/[0.05]"
               />
             </div>
             <div>
@@ -122,7 +122,7 @@ export function Contact() {
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
                 placeholder="voce@email.com"
                 maxLength={255}
-                className="w-full rounded-full border border-white/10 bg-white/[0.03] px-6 py-4 text-base italic text-white/90 placeholder:text-white/30 outline-none transition-all focus:border-[#e81035]/50 focus:bg-white/[0.05]"
+                className="w-full rounded-full border border-white/10 bg-white/[0.03] px-6 py-4 text-base text-white/90 placeholder:text-white/30 outline-none transition-all focus:border-[#e81035]/50 focus:bg-white/[0.05]"
               />
             </div>
             <div>
@@ -136,15 +136,15 @@ export function Contact() {
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
                 placeholder="Conte sobre seu projeto..."
                 maxLength={1000}
-                className="w-full rounded-3xl border border-white/10 bg-white/[0.03] px-6 py-4 text-base italic text-white/90 placeholder:text-white/30 outline-none transition-all focus:border-[#e81035]/50 focus:bg-white/[0.05]"
+                className="w-full rounded-3xl border border-white/10 bg-white/[0.03] px-6 py-4 text-base text-white/90 placeholder:text-white/30 outline-none transition-all focus:border-[#e81035]/50 focus:bg-white/[0.05]"
               />
             </div>
 
             {status === "error" && (
-              <p className="text-sm italic text-[#e81035]">{errorMsg}</p>
+              <p className="text-sm text-[#e81035]">{errorMsg}</p>
             )}
             {status === "sent" && (
-              <p className="text-sm italic text-white/60">Mensagem pronta — abrindo WhatsApp...</p>
+              <p className="text-sm text-white/60">Mensagem pronta — abrindo WhatsApp...</p>
             )}
 
             <div className="flex justify-end pt-2">
@@ -175,7 +175,7 @@ export function Contact() {
         >
           <a
             href="mailto:seuemail@email.com"
-            className="text-sm italic text-white/35 underline-offset-4 transition-colors hover:text-white/70 hover:underline"
+            className="text-sm text-white/35 underline-offset-4 transition-colors hover:text-white/70 hover:underline"
           >
             Prefere e-mail? Clique aqui
           </a>

@@ -38,7 +38,7 @@ export function About() {
         >
           <p className="mb-6 text-xs uppercase tracking-[0.5em] text-white/40">Sobre</p>
           <h2 className="mb-10 text-5xl leading-[1.05] md:text-6xl">
-            Pra quem mais observa <em className="font-light italic text-white/70">do que fala</em>,
+            Pra quem mais observa <em className="font-light text-white/70">do que fala</em>,
             entender pessoas fica fácil.
           </h2>
 
@@ -63,7 +63,7 @@ export function About() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, ease: "easeOut", delay: 0.3 + i * 0.1 }}
-                className="glass rounded-full px-5 py-2 text-sm italic text-white/70"
+                className="glass rounded-full px-5 py-2 text-sm text-white/70"
               >
                 {tag}
               </motion.span>
