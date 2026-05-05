@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 const tabs = [
@@ -9,10 +9,24 @@ const tabs = [
 
 type TabId = (typeof tabs)[number]["id"];
 
-const items: Record<TabId, { title: string; meta: string }[]> = {
+type Item = { title: string; meta: string; video?: string };
+
+const adVideos = [
+  "/videos/ad-1.mp4",
+  "/videos/ad-2.mp4",
+  "/videos/ad-3.mp4",
+  "/videos/ad-4.mp4",
+  "/videos/ad-5.mp4",
+  "/videos/ad-6.mp4",
+  "/videos/ad-7.mp4",
+  "/videos/ad-8.mp4",
+];
+
+const items: Record<TabId, Item[]> = {
   anuncios: Array.from({ length: 8 }, (_, i) => ({
     title: `Campanha ${String(i + 1).padStart(2, "0")}`,
-    meta: "00:30 · Publicidade",
+    meta: "Publicidade",
+    video: adVideos[i],
   })),
   cortes: Array.from({ length: 8 }, (_, i) => ({
     title: `Corte ${String(i + 1).padStart(2, "0")}`,
@@ -92,45 +106,70 @@ export function Portfolio() {
             className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4"
           >
             {items[active].map((item, i) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.7, ease: "easeOut", delay: i * 0.07 }}
-                whileHover={{ y: -6 }}
-                className="glass glass-hover grain group relative aspect-video cursor-pointer overflow-hidden rounded-xl"
-              >
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    background:
-                      "radial-gradient(ellipse at 50% 30%, #1a0008 0%, transparent 60%), linear-gradient(180deg, #0d0d12, #050507)",
-                  }}
-                />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <motion.div
-                    initial={{ scale: 0.8, opacity: 0.6 }}
-                    whileHover={{ scale: 1, opacity: 1 }}
-                    className="glass flex h-14 w-14 items-center justify-center rounded-full text-white/90 transition-all duration-500 group-hover:text-[color:#e81035]"
-                    style={{ paddingLeft: 4 }}
-                  >
-                    <PlayIcon />
-                  </motion.div>
-                </div>
-                <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-4">
-                  <div>
-                    <p className="text-sm text-white/90">{item.title}</p>
-                    <p className="text-[11px] uppercase tracking-[0.25em] text-white/40">
-                      {item.meta}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
+              <VideoCard key={item.title} item={item} index={i} />
             ))}
           </motion.div>
         </AnimatePresence>
       </div>
     </section>
+  );
+}
+
+function VideoCard({ item, index }: { item: Item; index: number }) {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.7, ease: "easeOut", delay: index * 0.07 }}
+      whileHover={{ y: -6 }}
+      onHoverStart={() => videoRef.current?.play().catch(() => {})}
+      onHoverEnd={() => {
+        if (videoRef.current) {
+          videoRef.current.pause();
+          videoRef.current.currentTime = 0;
+        }
+      }}
+      className="glass glass-hover grain group relative aspect-video cursor-pointer overflow-hidden rounded-xl"
+    >
+      {item.video ? (
+        <video
+          ref={videoRef}
+          src={item.video}
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      ) : (
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse at 50% 30%, #1a0008 0%, transparent 60%), linear-gradient(180deg, #0d0d12, #050507)",
+          }}
+        />
+      )}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 transition-opacity duration-500 group-hover:opacity-60" />
+      <div className="absolute inset-0 flex items-center justify-center">
+        <motion.div
+          initial={{ scale: 0.8, opacity: 0.6 }}
+          whileHover={{ scale: 1, opacity: 1 }}
+          className="glass flex h-14 w-14 items-center justify-center rounded-full text-white/90 transition-all duration-500 group-hover:text-[color:#e81035]"
+          style={{ paddingLeft: 4 }}
+        >
+          <PlayIcon />
+        </motion.div>
+      </div>
+      <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-4">
+        <div>
+          <p className="text-sm text-white/90">{item.title}</p>
+          <p className="text-[11px] uppercase tracking-[0.25em] text-white/40">{item.meta}</p>
+        </div>
+      </div>
+    </motion.div>
   );
 }
