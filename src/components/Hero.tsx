@@ -19,13 +19,13 @@ export function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.1, ease: "easeOut", delay: 0.1 }}
-          className="text-[14vw] leading-[0.85] tracking-[-0.04em] sm:text-[9rem] md:text-[11rem]"
-          style={{ fontWeight: 900 }}
+          className="text-[11vw] leading-[0.95] tracking-[0] sm:text-[6rem] md:text-[7.5rem]"
+          style={{ fontWeight: 700 }}
         >
-          Gabriel
+          Gabriel Vieira
         </motion.h1>
 
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-lg italic text-white/70 md:text-2xl">
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-lg text-white/70 md:text-2xl">
           {tagline.map((word, i) => (
             <motion.span
               key={i}
