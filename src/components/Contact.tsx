@@ -17,6 +17,25 @@ function WhatsAppIcon() {
 }
 
 export function Contact() {
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const result = contactSchema.safeParse(form);
+    if (!result.success) {
+      setStatus("error");
+      setErrorMsg(result.error.issues[0]?.message ?? "Verifique os campos");
+      return;
+    }
+    setStatus("sending");
+    const text = `Olá! Sou ${result.data.name} (${result.data.email}).%0A%0A${encodeURIComponent(result.data.message)}`;
+    window.open(`https://wa.me/5554996276214?text=${text}`, "_blank", "noopener,noreferrer");
+    setStatus("sent");
+    setForm({ name: "", email: "", message: "" });
+  };
+
   return (
     <section id="contato" className="relative px-6 py-32 md:py-44">
       <div className="mx-auto max-w-3xl text-center">
