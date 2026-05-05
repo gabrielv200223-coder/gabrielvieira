@@ -37,22 +37,22 @@ export function About() {
           className="flex flex-col justify-center"
         >
           <p className="mb-6 text-xs uppercase tracking-[0.5em] text-white/40">Sobre</p>
-          <h2 className="mb-10 text-5xl leading-[1.05] font-sans md:text-6xl">
-            Pra quem mais observa <em className="italic text-white/70 font-light">do que fala</em>,
+          <h2 className="mb-10 text-5xl leading-[1.05] md:text-6xl">
+            Pra quem mais observa <em className="font-light italic text-white/70">do que fala</em>,
             entender pessoas fica fácil.
           </h2>
 
           <div className="space-y-5 text-lg leading-relaxed text-white/75 md:text-xl">
-            <p className="font-sans font-normal">
-              Opa, tudo certo? Me chamo <span className="text-white">Gabriel Vieira</span>. Sou estudante
+            <p>
+              Opa, tudo certo? Me chamo <span className="text-white">Gabriel</span>. Sou estudante
               de Publicidade e sempre tive como hobbie editar vídeos para mim mesmo na adolescência
               — eu tinha o sonho de crescer no YouTube.
             </p>
-            <p className="font-sans font-normal">
+            <p>
               Em consequência disso, comecei desde cedo a tratar vídeos como uma forma de jornada na
               qual o espectador não pode desviar e precisa terminar.
             </p>
-            <p className="font-sans font-normal">Hoje eu trabalho com isso.</p>
+            <p>Hoje eu trabalho com isso.</p>
           </div>
 
           <div className="mt-10 flex flex-wrap gap-3">
@@ -63,7 +63,7 @@ export function About() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, ease: "easeOut", delay: 0.3 + i * 0.1 }}
-                className="glass rounded-full px-5 py-2 text-sm italic text-white/70 font-sans"
+                className="glass rounded-full px-5 py-2 text-sm italic text-white/70"
               >
                 {tag}
               </motion.span>

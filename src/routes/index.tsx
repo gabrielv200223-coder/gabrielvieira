@@ -31,7 +31,7 @@ function Index() {
       <Contact />
       <footer className="border-t border-white/5 px-6 py-10 text-center">
         <p className="text-xs uppercase tracking-[0.4em] text-white/35">
-          Gabriel Vieira <span style={{ color: "#e81035" }}>©</span> 2025
+          Gabriel <span style={{ color: "#e81035" }}>©</span> 2025
         </p>
       </footer>
     </main>

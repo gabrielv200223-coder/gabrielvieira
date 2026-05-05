@@ -38,7 +38,7 @@ export function Contact() {
 
   return (
     <section id="contato" className="relative px-6 py-32 md:py-44">
-      <div className="mx-auto max-w-3xl">
+      <div className="mx-auto max-w-3xl text-center">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -54,7 +54,7 @@ export function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="text-6xl leading-[1] md:text-8xl font-sans font-extrabold text-center"
+          className="text-6xl leading-[1] md:text-8xl"
         >
           Vamos <em className="italic font-light text-white/80">conversar.</em>
         </motion.h2>
@@ -82,7 +82,7 @@ export function Contact() {
             <span className="text-[color:#e81035] transition-all duration-500 group-hover:drop-shadow-[0_0_10px_#e81035]">
               <WhatsAppIcon />
             </span>
-            <span className="tracking-wide font-sans font-normal">Chamar no WhatsApp</span>
+            <span className="tracking-wide">Chamar no WhatsApp</span>
           </motion.a>
         </motion.div>
 
@@ -147,7 +147,7 @@ export function Contact() {
               <p className="text-sm italic text-white/60">Mensagem pronta — abrindo WhatsApp...</p>
             )}
 
-            <div className="flex pt-2">
+            <div className="flex justify-end pt-2">
               <button
                 type="submit"
                 disabled={status === "sending"}
