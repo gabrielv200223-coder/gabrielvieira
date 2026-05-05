@@ -43,10 +43,10 @@ export function Portfolio() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.9, ease: "easeOut" }}
-          className="mb-16 text-center"
+          className="mb-16"
         >
           <p className="mb-5 text-xs uppercase tracking-[0.5em] text-white/40">Portfolio</p>
-          <h2 className="text-6xl md:text-8xl">Trabalhos</h2>
+          <h2 className="text-6xl md:text-8xl font-sans font-extrabold">Trabalhos</h2>
         </motion.div>
 
         <div className="mb-14 flex justify-center">
@@ -72,7 +72,7 @@ export function Portfolio() {
                     />
                   )}
                   <span
-                    className={`relative italic ${isActive ? "text-white" : "text-white/55 hover:text-white/80"}`}
+                    className={isActive ? "relative italic text-white/55 hover:text-white/80 font-sans px-0 my-0 font-light text-sm mx-[5px]" : "relative italic text-white/55 hover:text-white/80"}
                   >
                     {t.label}
                   </span>
