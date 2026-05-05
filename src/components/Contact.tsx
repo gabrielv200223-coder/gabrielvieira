@@ -1,4 +1,12 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
+import { z } from "zod";
+
+const contactSchema = z.object({
+  name: z.string().trim().min(1, "Informe seu nome").max(100),
+  email: z.string().trim().email("E-mail inválido").max(255),
+  message: z.string().trim().min(1, "Escreva uma mensagem").max(1000),
+});
 
 function WhatsAppIcon() {
   return (
