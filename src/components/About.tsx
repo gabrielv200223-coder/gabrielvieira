@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import portrait from "@/assets/portrait.jpg";
 
 const tags = ["Introspectivo", "Leitura de Padrões", "Foco no Humano", "Contador de Histórias"];
 
@@ -13,21 +14,28 @@ export function About() {
           transition={{ duration: 1, ease: "easeOut" }}
           className="glass grain relative aspect-[4/5] overflow-hidden rounded-2xl"
         >
+          <img
+            src={portrait}
+            alt="Retrato de Gabriel Vieira"
+            className="absolute inset-0 h-full w-full object-cover object-[60%_30%]"
+            loading="lazy"
+          />
           <div
-            className="absolute inset-0"
+            className="absolute inset-0 pointer-events-none"
             style={{
               background:
-                "radial-gradient(ellipse at 30% 20%, #1a0008 0%, transparent 60%), linear-gradient(180deg, #0d0d12 0%, #050507 100%)",
+                "linear-gradient(180deg, rgba(10,10,15,0) 40%, rgba(10,10,15,0.85) 100%)",
             }}
           />
           <div className="absolute inset-0 flex items-end justify-start p-8">
-            <span className="text-xs uppercase tracking-[0.4em] text-white/30">retrato · 2025</span>
+            <span className="text-xs uppercase tracking-[0.4em] text-white/60">retrato · 2025</span>
           </div>
           <div
             className="absolute right-6 top-6 h-2 w-2 rounded-full"
             style={{ backgroundColor: "#e81035", boxShadow: "0 0 10px #e81035" }}
           />
         </motion.div>
+
 
         <motion.div
           initial={{ opacity: 0, x: 60 }}
