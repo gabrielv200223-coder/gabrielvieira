@@ -32,16 +32,6 @@ export function Contact() {
           Vamos <em className="italic font-light text-white/80">conversar.</em>
         </motion.h2>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.9, ease: "easeOut", delay: 0.2 }}
-          className="mx-auto mt-8 max-w-xl text-lg italic text-white/60 md:text-xl"
-        >
-          A melhor forma de me chamar é pelo WhatsApp. Respondo rápido.
-        </motion.p>
-
         <motion.div
           initial={{ opacity: 0, scale: 0.92 }}
           whileInView={{ opacity: 1, scale: 1 }}
