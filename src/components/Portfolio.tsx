@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 const tabs = [
@@ -9,10 +9,24 @@ const tabs = [
 
 type TabId = (typeof tabs)[number]["id"];
 
-const items: Record<TabId, { title: string; meta: string }[]> = {
+type Item = { title: string; meta: string; video?: string };
+
+const adVideos = [
+  "/videos/ad-1.mp4",
+  "/videos/ad-2.mp4",
+  "/videos/ad-3.mp4",
+  "/videos/ad-4.mp4",
+  "/videos/ad-5.mp4",
+  "/videos/ad-6.mp4",
+  "/videos/ad-7.mp4",
+  "/videos/ad-8.mp4",
+];
+
+const items: Record<TabId, Item[]> = {
   anuncios: Array.from({ length: 8 }, (_, i) => ({
     title: `Campanha ${String(i + 1).padStart(2, "0")}`,
-    meta: "00:30 · Publicidade",
+    meta: "Publicidade",
+    video: adVideos[i],
   })),
   cortes: Array.from({ length: 8 }, (_, i) => ({
     title: `Corte ${String(i + 1).padStart(2, "0")}`,
