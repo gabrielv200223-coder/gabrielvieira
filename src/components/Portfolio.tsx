@@ -11,8 +11,13 @@ type TabId = (typeof tabs)[number]["id"];
 
 type Item = { title: string; meta: string; video?: string };
 
+type Item = { title: string; meta: string; video?: string; horizontal?: boolean };
+
 const adVideos = Array.from({ length: 8 }, (_, i) => `/videos/ad-${i + 1}.mp4`);
 const cutVideos = Array.from({ length: 8 }, (_, i) => `/videos/cut-${i + 1}.mp4`);
+const reelVideos = Array.from({ length: 8 }, (_, i) => `/videos/reel-${i + 1}.mp4`);
+// Reels 2 and 7 são horizontais (16:9)
+const horizontalReels = new Set([2, 7]);
 
 const items: Record<TabId, Item[]> = {
   anuncios: Array.from({ length: 8 }, (_, i) => ({
@@ -28,6 +33,8 @@ const items: Record<TabId, Item[]> = {
   reels: Array.from({ length: 8 }, (_, i) => ({
     title: `Reel ${String(i + 1).padStart(2, "0")}`,
     meta: "00:15 · Social",
+    video: reelVideos[i],
+    horizontal: horizontalReels.has(i + 1),
   })),
 };
 
