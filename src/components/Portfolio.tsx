@@ -153,7 +153,7 @@ function VideoCard({ item, index }: { item: Item; index: number }) {
         }
       }}
       onClick={handleFullscreen}
-      className="glass glass-hover grain group relative aspect-video cursor-pointer overflow-hidden rounded-xl"
+      className="glass glass-hover grain group relative aspect-[9/16] cursor-pointer overflow-hidden rounded-xl"
     >
       {item.video ? (
         <video
@@ -164,7 +164,7 @@ function VideoCard({ item, index }: { item: Item; index: number }) {
           playsInline
           preload="metadata"
           controls={false}
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-contain"
         />
       ) : (
         <div
