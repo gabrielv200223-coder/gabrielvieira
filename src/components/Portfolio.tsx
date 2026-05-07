@@ -46,6 +46,17 @@ function PlayIcon() {
   );
 }
 
+function FullscreenIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M8 3H5a2 2 0 0 0-2 2v3" />
+      <path d="M21 8V5a2 2 0 0 0-2-2h-3" />
+      <path d="M3 16v3a2 2 0 0 0 2 2h3" />
+      <path d="M16 21h3a2 2 0 0 0 2-2v-3" />
+    </svg>
+  );
+}
+
 export function Portfolio() {
   const [active, setActive] = useState<TabId>("anuncios");
 
@@ -118,6 +129,15 @@ export function Portfolio() {
 function VideoCard({ item, index }: { item: Item; index: number }) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
+  const handleFullscreen = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const v = videoRef.current;
+    if (!v) return;
+    if (v.requestFullscreen) v.requestFullscreen();
+    // @ts-expect-error iOS Safari
+    else if (v.webkitEnterFullscreen) v.webkitEnterFullscreen();
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
@@ -132,6 +152,7 @@ function VideoCard({ item, index }: { item: Item; index: number }) {
           videoRef.current.currentTime = 0;
         }
       }}
+      onClick={handleFullscreen}
       className="glass glass-hover grain group relative aspect-video cursor-pointer overflow-hidden rounded-xl"
     >
       {item.video ? (
@@ -142,6 +163,7 @@ function VideoCard({ item, index }: { item: Item; index: number }) {
           loop
           playsInline
           preload="metadata"
+          controls={false}
           className="absolute inset-0 h-full w-full object-cover"
         />
       ) : (
@@ -153,8 +175,8 @@ function VideoCard({ item, index }: { item: Item; index: number }) {
           }}
         />
       )}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 transition-opacity duration-500 group-hover:opacity-60" />
-      <div className="absolute inset-0 flex items-center justify-center">
+      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-30" />
+      <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
         <motion.div
           initial={{ scale: 0.8, opacity: 0.6 }}
           whileHover={{ scale: 1, opacity: 1 }}
@@ -164,12 +186,14 @@ function VideoCard({ item, index }: { item: Item; index: number }) {
           <PlayIcon />
         </motion.div>
       </div>
-      <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-4">
-        <div>
-          <p className="text-sm text-white/90">{item.title}</p>
-          <p className="text-[11px] uppercase tracking-[0.25em] text-white/40">{item.meta}</p>
-        </div>
-      </div>
+      <button
+        type="button"
+        onClick={handleFullscreen}
+        aria-label="Tela cheia"
+        className="glass absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full text-white/80 opacity-0 transition-all duration-300 hover:text-[color:#e81035] group-hover:opacity-100"
+      >
+        <FullscreenIcon />
+      </button>
     </motion.div>
   );
 }
