@@ -11,16 +11,8 @@ type TabId = (typeof tabs)[number]["id"];
 
 type Item = { title: string; meta: string; video?: string };
 
-const adVideos = [
-  "/videos/ad-1.mp4",
-  "/videos/ad-2.mp4",
-  "/videos/ad-3.mp4",
-  "/videos/ad-4.mp4",
-  "/videos/ad-5.mp4",
-  "/videos/ad-6.mp4",
-  "/videos/ad-7.mp4",
-  "/videos/ad-8.mp4",
-];
+const adVideos = Array.from({ length: 8 }, (_, i) => `/videos/ad-${i + 1}.mp4`);
+const cutVideos = Array.from({ length: 8 }, (_, i) => `/videos/cut-${i + 1}.mp4`);
 
 const items: Record<TabId, Item[]> = {
   anuncios: Array.from({ length: 8 }, (_, i) => ({
@@ -31,6 +23,7 @@ const items: Record<TabId, Item[]> = {
   cortes: Array.from({ length: 8 }, (_, i) => ({
     title: `Corte ${String(i + 1).padStart(2, "0")}`,
     meta: "01:20 · Podcast",
+    video: cutVideos[i],
   })),
   reels: Array.from({ length: 8 }, (_, i) => ({
     title: `Reel ${String(i + 1).padStart(2, "0")}`,
